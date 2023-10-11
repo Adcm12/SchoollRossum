@@ -1,0 +1,27 @@
+body {
+    color: rgb(254, 254, 255);
+    background: rgb(43, 84, 85);
+}
+
+h1 {
+    text-align: center;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    background-color: aliceblue;
+    color: black;
+}
+
+footer {
+    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid white;
+    text-align: center;
+    
+}
