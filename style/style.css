@@ -1,6 +1,6 @@
 body {
-    color: rgb(254, 254, 255);
-    background: rgb(43, 84, 85);
+    color: rgb(101, 178, 241);
+    background: rgb(168, 13, 139);
 }
 
 h1 {
@@ -12,7 +12,7 @@ a{
 }
 
 a:hover{
-    background-color: aliceblue;
+    background-color: rgb(65, 156, 235);
     color: black;
 }
 
@@ -21,7 +21,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    border-top: 1px solid white;
+    border-top: 1px solid rgb(106, 65, 240);
     text-align: center;
     
 }
