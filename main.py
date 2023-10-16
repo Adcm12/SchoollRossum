@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, session
-from pessoa import Pessoa
+from flask_sqlalchemy import SQLAlchemy
+from pessoa import Pessoa, Usuario
+
 
 pessoa1 = Pessoa('Rodrigo', 32, 1.87)
 pessoa2 = Pessoa('Marina', 29, 1.69)
@@ -14,8 +16,16 @@ app = Flask(__name__)
 
 app.secret_key = "123456"
 
+SQLALCHEMY_DATABASE_URI = 'sqlite:///C:\\Users\\Adrian12\\Desktop\\SchoollRossum\\aplication.sqlite3'
+
+db = SQLAlchemy(app)
+
+lista = Pessoa.query.order_by(Pessoa.id)
+
 @app.route('/')
 def inicio():
+    
+    lista = Pessoa.query.order_by(Pessoa.id)
     return render_template('lista.html', titulo = 'Lista de Alunos', pessoas = lista)
 
 @app.route('/novo')

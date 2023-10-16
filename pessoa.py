@@ -1,5 +1,24 @@
-class Pessoa:
-    def __init__(self, nome, idade, altura):
-        self.Nome = nome
-        self.Idade = idade
-        self.Altura = altura
+from main import db
+
+class Pessoa(db.Model):
+    
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    nome = db.Column(db. String(15), nullable = False)
+    idade = db.Column(db. Integer(15), nullable = False)
+    altura = db.Column(db. String(15), nullable = False)
+
+
+    def __repr__(self):
+
+        return '<NAME %r' % self.name
+    
+
+class Usuario(db.Model):
+    
+    nickname = db.Column(db. String(15), nullable = True)
+    nome = db.Column(db. Integer(15), nullable = False)
+    senha = db.Column(db. String(15), nullable = False)
+
+    def __repr__(self):
+
+        return '<NAME %r' % self.name
