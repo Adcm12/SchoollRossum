@@ -16,14 +16,14 @@ if conn is not None:
 
     cursor.execute('''CREATE TABLE if not exists Pessoa (id integer primary key autoincrement,
                     nome varchar(15) not null,
-                    idade integer not null,
+                    idade varchar(15) not null,
                     altura varchar(5) not null );
                    ''')
 
-    cursor.execute('''CREATE TABLE if not exists Usuarios (
+    cursor.execute('''CREATE TABLE if not exists usuario (
                    nome varchar(15) not null,
-                   nickname varchar(30) primary key not null,
-                   senha varchar(30) not null);''')
+                   nickname varchar(15) primary key not null,
+                   senha varchar(15) not null);''')
     
     conn.commit()
     cursor.close()
