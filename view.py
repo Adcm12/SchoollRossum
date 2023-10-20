@@ -57,12 +57,12 @@ def autenticar():
 def logout():
     session['usuario_logado'] = None
     flash('Voce foi desconectado')
-    return redirect(url_for('login'))
+    return redirect(url_for('inicio'))
 
 @app.route('/editar/<int:id>')
 def editar(id):
     if 'usuario_logado' not in session or session['usuario_logado'] is None:
-        return redirect(url_for('login', proximo= url_for('editar')))
+        return redirect(url_for('login', proximo= url_for('inicio')))
     #fazer uma query do banco
     pessoa = Pessoa.query.filter_by(id=id).first()
     return render_template('editar.html', titulo= 'Editar Pessoa', pessoa = pessoa)
