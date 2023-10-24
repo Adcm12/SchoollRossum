@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, session, flash, url_for
 from main import app, db
 from models.pessoa import Pessoa
 from models.usuario import Usuario
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash 
 
 @app.route('/')
 def inicio():
@@ -88,3 +90,49 @@ def atualizar():
     
     # Redirecionar de volta para a página principal
     return redirect(url_for('inicio'))
+
+@app.route('/deletar/<int:id>')
+def deletar(id):
+    if 'usuario_logado' not in session or session['usuario_logado'] is None:
+        return redirect(url_for('login'))
+
+    Pessoa.query.filter_by(id=id).delete()
+    db.session.commit()
+    flash('Pessoa deletada com sucesso')
+    return redirect(url_for('inicio'))
+
+@app.route('/registrar')
+def registrar():
+    if 'usuario_logado' not in session or session['usuario_logado'] is None:
+        return redirect(url_for('login', proximo= url_for('inicio')))
+    
+    return render_template('registrar.html')
+
+
+
+@app.route('/registrar_usuario', methods=['POST'])
+def registrar_usu():
+
+        nome_usuario = request.form.get('username')
+        nickname = request.form.get('nickname')
+        senha = request.form.get('password')
+
+        existe_usuario = Usuario.query.filter_by(nome=nome_usuario).count()
+
+        if existe_usuario > 0:
+            flash("NOME DE USUARIO JA CADASTRADO")
+            return render_template('registrar.html')
+        
+        else:
+            try:
+                novo_usuario = Usuario(nome=nome_usuario, nickname = nickname, senha=senha)
+                db.session.add(novo_usuario)
+                db.session.commit()
+                flash("Registro de novo usuário realizado com sucesso")
+                return redirect(url_for('inicio'))
+            except:
+                flash("Erro ao cadastrar novo usuário")
+
+                return render_template('registrar.html')
+
+
