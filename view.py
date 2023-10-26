@@ -109,7 +109,6 @@ def registrar():
     return render_template('registrar.html')
 
 
-
 @app.route('/registrar_usuario', methods=['POST'])
 def registrar_usu():
 
